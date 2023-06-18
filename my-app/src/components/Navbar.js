@@ -1,34 +1,48 @@
 import {Component} from 'react';
-import {useRef} from 'react';
 import css from './css/NavBarSimple.module.css';
 
 class Navbar extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            welcomeMessageState: true
+            message: "Welcome",
+            login: "Login"
         };
-        this.eventHandler = this.eventHandler.bind(this);
     }
 
-    getMessage() {
-        var message = "";
-        this.state.welcomeMessage === true ?  message = "Welcome to my site" : message = "Thankyou for checking in";
-        return message;
-    }
 
-    eventHandler = event => {
-        const ref = useRef(null);
-        this.setState(prevstate => ({welcomeMessageState: !prevstate.welcomeMessageState}));
-        var elem = event.target.getAttribute("data-message_id");
-        ref.setAttribute(elem, this.getMessage());
+    eventHandler() {
+        this.setState((prevState, prevProps) => {
+            var m1 = "";
+            if (prevState.message === "Welcome") {
+                m1 = "Hello";
+            }
+            else if (prevState.message === "Hello") {
+                m1 = "Goodbye";
+            }
+            else {
+                m1 = "Hello";
+            }
+            return {
+                message: m1,
+                login: prevState.login === "Login"? "Logout": "Login"
+            };
+        }, () => {
+            console.log("Message State:", this.state.message)
+            console.log("Login State:", this.state.login)
+        });
     }
 
     render() {
         return (
-            <div className={css.navbarSimple}>
-                <span id="message">{this.getMessage()}</span>
-                <button onClick={this.eventHandler} data-message-id="message">login</button>
+            <div className={css.NavBar}>
+                <div>
+                    <h1>My Gallery</h1>
+                </div>
+                <div>
+                    <span id="message">{this.state.message}</span>
+                    <button onClick={() => this.eventHandler()}>{this.state.login}</button>
+                </div>
             </div>
         );
     }
