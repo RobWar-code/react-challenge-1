@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import css from './css/NavBarForm.module.css';
+import NavBarLogin from './NavBarLogin.js';
 
 export class NavBarForm extends Component {
   constructor(props) {
@@ -22,17 +23,7 @@ export class NavBarForm extends Component {
       <div className={css.NavBar}>
         <h1>My Gallery</h1>
         {this.state.isLoggedIn ? (
-                <div>
-                    <form>
-                        <label>Username:
-                            <input type="text" name="username" />
-                        </label>
-                        <label>Password:
-                            <input type="password" name="password" />
-                        </label>
-                        <button onClick={this.clickHandler}>SUBMIT</button>
-                    </form>
-                </div>
+              <NavBarLogin clickHandler={this.clickHandler} />
             ):
             (
                 <div>
