@@ -6,6 +6,13 @@ import { default as savedPosts } from '../posts.json';
 export class Content extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      isLoaded: false
+    }
+  }
+
+  componentDidMount() {
+    setTimeout(() => {this.setState({isLoaded: true})}, 2000)
   }
 
   render() {
@@ -14,7 +21,7 @@ export class Content extends Component {
         <div className={css.TitleBar}>
             <h1>My Photos</h1>
         </div>
-        <ImageList posts={savedPosts.savedPosts} />
+        <ImageList posts={savedPosts.savedPosts} isLoaded={this.state.isLoaded}/>
       </div>
     )
   }
