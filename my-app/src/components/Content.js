@@ -34,8 +34,8 @@ export class Content extends Component {
         <div className={css.TitleBar}>
             <h1>My Photos</h1>
             <form>
-              <label htmlFor="id-author">:</label>
-              <input id="id-author" placeholder="By Author" onChange={(event) => {handleAuthorChange(event)}} />
+              <label htmlFor="id-author">Search:</label>
+              <input id="id-author" placeholder="By Author" onChange={(event) => {this.handleAuthorChange(event)}} />
             </form>
             <h4>Posts Found: {this.state.posts.length}</h4>
         </div>
