@@ -7,12 +7,25 @@ export class Content extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isLoaded: false
+      isLoaded: false,
+      posts: []
     }
+  }
+
+  handleAuthorChange = (event) => {
+    let filteredPosts = savedPosts.savedPosts.filter((post) => {
+      return post.name.toLowerCase().includes(event.target.value.toLowerCase())
+    })
+    this.setState({
+      posts: filteredPosts
+    })
   }
 
   componentDidMount() {
     setTimeout(() => {this.setState({isLoaded: true})}, 2000)
+    this.setState({
+      posts: savedPosts.savedPosts
+    })
   }
 
   render() {
@@ -20,8 +33,13 @@ export class Content extends Component {
       <div className={css.Content}>
         <div className={css.TitleBar}>
             <h1>My Photos</h1>
+            <form>
+              <label htmlFor="id-author">:</label>
+              <input id="id-author" placeholder="By Author" onChange={(event) => {handleAuthorChange(event)}} />
+            </form>
+            <h4>Posts Found: {this.state.posts.length}</h4>
         </div>
-        <ImageList posts={savedPosts.savedPosts} isLoaded={this.state.isLoaded}/>
+        <ImageList posts={this.state.posts} isLoaded={this.state.isLoaded}/>
       </div>
     )
   }
