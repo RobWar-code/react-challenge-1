@@ -3,7 +3,8 @@ import Sidebar from './components/Sidebar.js';
 // import Navbar from './components/Navbar.js';
 import NavBarForm from './components/NavBarForm.js'
 // import Content from './components/Content.js'
-import ContentHooks from './components/ContentHooks'
+// import ContentHooks from './components/ContentHooks'
+import ContentAPI from './components/ContentAPI'
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
       <Sidebar />
       {/* <Navbar />*/}
       <NavBarForm />
-      <ContentHooks />
+      <ContentAPI />
     </div>
   );
 }
