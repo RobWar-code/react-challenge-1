@@ -10,13 +10,14 @@ export class Content extends Component {
     this.state = {
       isLoaded: false,
       posts: [],
+      savedPosts: [],
       httpError: null
     }
   }
 
   handleAuthorChange = (event) => {
-    let filteredPosts = savedPosts.savedPosts.filter((post) => {
-      return post.name.toLowerCase().includes(event.target.value.toLowerCase())
+    let filteredPosts = this.state.savedPosts.filter((post) => {
+      return post.user.toLowerCase().includes(event.target.value.toLowerCase())
     })
     this.setState({
       posts: filteredPosts
@@ -24,16 +25,17 @@ export class Content extends Component {
   }
 
   componentDidMount() {
-    fetchImages();
+    this.fetchImages();
   }
 
   fetchImages() {
-    let url = 'https://pixabay.com/api/' + '?key=' + API_KEY + '&q=yellow+flowers' + '&image_type=photo'
-    axios.get('url')
+    let url = 'https://pixabay.com/api/?key=' + API_KEY + '&q=yellow+flowers&image_type=photo'
+    axios.get(url)
     .then(response => {
         this.setState ({
             isLoaded: true,
-            posts: response.data.hits
+            posts: response.data.hits,
+            savedPosts: response.data.hits
         })
     })
     .catch((error) => {
